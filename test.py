@@ -1,3 +1,5 @@
+import json
+import pandas as pd
 import requests
 
 
@@ -20,3 +22,5 @@ def get_image(SEARCH_TERM):
     data = response.json()['items']
     for item in data:
         print(item['link'])
+    with open('data.json', 'w') as f:
+        json.dump(data, f)
