@@ -1,7 +1,10 @@
 import json
+import random
 import pandas as pd
 import requests
-
+from ImageVM import ImageVM
+from main import send_message
+global link 
 
 def get_image(SEARCH_TERM):
     API_KEY = "AIzaSyAHrKsi_x2oDvOtorOWIgJfJS-F7sbST_I"
@@ -14,10 +17,23 @@ def get_image(SEARCH_TERM):
         "cx": SEARCH_ENGINE_ID,
         "searchType": "image",
     }
-
+    list = []
     response = requests.get(URL, params=params)
     data = response.json()['items']
     for item in data:
-        print(item['link'])
-    with open('data.json', 'w') as f:
-        json.dump(data, f)
+        image_vm_object = ImageVM(
+            kind=item['kind'],
+            title=item['title'],
+            link=item['link'],
+            displayLink=item['displayLink'],
+            fileFormat=item['fileFormat']
+        )
+        list.append(image_vm_object)
+    print(random.choice(list).link)
+    link = random.choice(list).link
+    send_message(link)
+             
+        
+    
+ 
+    
