@@ -29,8 +29,8 @@ def get_image(SEARCH_TERM):
             fileFormat=item['fileFormat']
         )
         list.append(image_vm_object)
-    print(random.choice(list).link)
     link = random.choice(list).link
+    print(link)
     send_message(link)
              
         
