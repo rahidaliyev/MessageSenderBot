@@ -1,8 +1,6 @@
-import json
 import os
 import random
 from dotenv import load_dotenv
-import pandas as pd
 import requests
 from ImageVM import ImageVM
 global link 
