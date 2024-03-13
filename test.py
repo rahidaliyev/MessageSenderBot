@@ -8,7 +8,7 @@ global link
 def get_image(SEARCH_TERM):
     load_dotenv()
     API_KEY = os.getenv("API_KEY")
-    SEARCH_ENGINE_ID = "c2cfb4d8340e14562"
+    SEARCH_ENGINE_ID = os.getenv("SEARCH_ENGINE_ID")
     URL = "https://www.googleapis.com/customsearch/v1"
 
     params = {
