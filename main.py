@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from telegram.ext import Application,CommandHandler,MessageHandler,filters,ContextTypes
 import os
 
+from test import get_image
+
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
@@ -26,6 +28,8 @@ def handle_response(text:str)->str:
         return 'I am good!'
     if 'i love python' in processed:
         return 'Remember!!!'
+    if 'find image' in processed:
+        return get_image("Penguin")
     return 'I dont understand the command!!!'  
 
 async def handle_message(update:Update,context:ContextTypes.DEFAULT_TYPE):
