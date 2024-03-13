@@ -30,7 +30,7 @@ def get_image(SEARCH_TERM):
         )
         list.append(image_vm_object)
     link = random.choice(list).link
-    print(link)
+    return link
              
         
     
