@@ -1,13 +1,15 @@
 import json
+import os
 import random
+from dotenv import load_dotenv
 import pandas as pd
 import requests
 from ImageVM import ImageVM
-from main import send_message
 global link 
 
 def get_image(SEARCH_TERM):
-    API_KEY = "AIzaSyAHrKsi_x2oDvOtorOWIgJfJS-F7sbST_I"
+    load_dotenv()
+    API_KEY = os.getenv("API_KEY")
     SEARCH_ENGINE_ID = "c2cfb4d8340e14562"
     URL = "https://www.googleapis.com/customsearch/v1"
 
@@ -31,7 +33,6 @@ def get_image(SEARCH_TERM):
         list.append(image_vm_object)
     link = random.choice(list).link
     print(link)
-    send_message(link)
              
         
     
