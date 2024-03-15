@@ -1,5 +1,5 @@
 import tkinter as tk
-from test import get_image
+from findImage import get_image
 
 def get_input():
     image_text = entry.get()

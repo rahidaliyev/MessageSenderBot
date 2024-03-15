@@ -2,8 +2,7 @@ from telegram import Update
 from dotenv import load_dotenv
 from telegram.ext import Application,CommandHandler,MessageHandler,filters,ContextTypes
 import os
-
-from test import get_image
+from findImage import get_image
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
