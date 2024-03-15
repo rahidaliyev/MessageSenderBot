@@ -11,7 +11,7 @@ TOKEN = os.getenv("TOKEN")
 
 #Commands
 async def start_command(update:Update,context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Hello mf!")
+    await update.message.reply_text("Hello!")
     
 async def help_command(update:Update,context: ContextTypes.DEFAULT_TYPE,):
     await update.message.reply_text("HELP me!")
