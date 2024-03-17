@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from telegram.ext import Application,CommandHandler,MessageHandler,filters,ContextTypes
 import os
 from findImage import get_image
+from typing import List
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -16,19 +17,15 @@ async def start_command(update:Update,context: ContextTypes.DEFAULT_TYPE):
 async def help_command(update:Update,context: ContextTypes.DEFAULT_TYPE,):
     await update.message.reply_text("HELP me!")
 
+
 async def custom_command(update:Update,context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("GOODBYE!!!")  
     
-#Responses
-def handle_response(text:str,update:Update)->str:
+#Responses 
+#Handle Response must change
+def handle_response(text:str,update:Update,processed_list: List[str])->str:
     processed: str = text.lower()
     processed_list.append(text.lower())
-    if 'hello' in processed:
-        return 'Hey there'
-    if 'how are you' in processed:
-        return 'I am good!'
-    if 'i love python' in processed:
-        return 'Remember!!!'
     if 'find image' in processed:
         return "Write a picture name: "
     if processed_list[0] == "find image":
@@ -43,7 +40,7 @@ async def handle_message(update:Update,context:ContextTypes.DEFAULT_TYPE):
     if message_type == 'group':
         return
     else:
-        response: str= handle_response(text,update)
+        response: str= handle_response(text,update,processed_list)
     print('Bot:',response)
     await update.message.reply_text(response)
     
