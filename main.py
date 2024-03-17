@@ -6,6 +6,7 @@ from findImage import get_image
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
+processed_list = []
 
 
 #Commands
@@ -19,8 +20,9 @@ async def custom_command(update:Update,context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("GOODBYE!!!")  
     
 #Responses
-def handle_response(text:str)->str:
+def handle_response(text:str,update:Update)->str:
     processed: str = text.lower()
+    processed_list.append(text.lower())
     if 'hello' in processed:
         return 'Hey there'
     if 'how are you' in processed:
@@ -28,7 +30,9 @@ def handle_response(text:str)->str:
     if 'i love python' in processed:
         return 'Remember!!!'
     if 'find image' in processed:
-        return get_image("Penguin")
+        return "Write a picture name: "
+    if processed_list[0] == "find image":
+        return get_image(update.message.text)
     return 'I dont understand the command!!!'  
 
 async def handle_message(update:Update,context:ContextTypes.DEFAULT_TYPE):
@@ -39,7 +43,7 @@ async def handle_message(update:Update,context:ContextTypes.DEFAULT_TYPE):
     if message_type == 'group':
         return
     else:
-        response: str= handle_response(text)
+        response: str= handle_response(text,update)
     print('Bot:',response)
     await update.message.reply_text(response)
     
