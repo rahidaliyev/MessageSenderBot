@@ -3,9 +3,9 @@ import random
 from dotenv import load_dotenv
 import requests
 from ImageVM import ImageVM
-global link 
 
-def get_image(SEARCH_TERM):
+
+def get_image(SEARCH_TERM: str) -> str:
     load_dotenv()
     API_KEY = os.getenv("API_KEY")
     SEARCH_ENGINE_ID = os.getenv("SEARCH_ENGINE_ID")
@@ -19,20 +19,15 @@ def get_image(SEARCH_TERM):
     }
     list = []
     response = requests.get(URL, params=params)
-    data = response.json()['items']
+    data = response.json()["items"]
     for item in data:
         image_vm_object = ImageVM(
-            kind=item['kind'],
-            title=item['title'],
-            link=item['link'],
-            displayLink=item['displayLink'],
-            fileFormat=item['fileFormat']
+            kind=item["kind"],
+            title=item["title"],
+            link=item["link"],
+            displayLink=item["displayLink"],
+            fileFormat=item["fileFormat"],
         )
         list.append(image_vm_object)
     link = random.choice(list).link
     return link
-             
-        
-    
- 
-    
