@@ -22,8 +22,9 @@ async def custom_command(update:Update,context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("GOODBYE!!!")  
     
 async def button_command(update:Update,context: ContextTypes.DEFAULT_TYPE):
-    button = InlineKeyboardButton("Click me!", callback_data='button_click')
-    markup = InlineKeyboardMarkup([[button]])
+    back_btn = InlineKeyboardButton("Download image!", callback_data='button_click')
+    search_btn = InlineKeyboardButton("Search again!", callback_data='button_click')
+    markup = InlineKeyboardMarkup([[back_btn,search_btn]])
     await update.message.reply_text('Please choose:', reply_markup=markup)
     
 #Responses 
