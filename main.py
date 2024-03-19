@@ -1,4 +1,4 @@
-from telegram import Update
+from telegram import Update,InlineKeyboardButton, InlineKeyboardMarkup
 from dotenv import load_dotenv
 from telegram.ext import Application,CommandHandler,MessageHandler,filters,ContextTypes
 import os
@@ -21,14 +21,20 @@ async def help_command(update:Update,context: ContextTypes.DEFAULT_TYPE,):
 async def custom_command(update:Update,context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("GOODBYE!!!")  
     
+async def button_command(update:Update,context: ContextTypes.DEFAULT_TYPE):
+    button = InlineKeyboardButton("Click me!", callback_data='button_click')
+    markup = InlineKeyboardMarkup([[button]])
+    await update.message.reply_text('Please choose:', reply_markup=markup)
+    
 #Responses 
 #Handle Response must change
-def handle_response(text:str,update:Update,processed_list: List[str])->str:
+def handle_response(text:str,update:Update,processed_list: List[str])->str or InlineKeyboardMarkup: # type: ignore
     processed: str = text.lower()
     processed_list.append(text.lower())
+    cmd_exists = "find image" in processed_list
     if 'find image' in processed:
         return "Write a picture name: "
-    if processed_list[0] == "find image":
+    if cmd_exists:
         return get_image(update.message.text)
     return 'I dont understand the command!!!'  
 
@@ -53,6 +59,7 @@ if __name__ == '__main__':
     
     
     #Commands
+    app.add_handler(CommandHandler('button',button_command))
     app.add_handler(CommandHandler('start',start_command))
     app.add_handler(CommandHandler('help',help_command))
     app.add_handler(CommandHandler('custom',custom_command))
